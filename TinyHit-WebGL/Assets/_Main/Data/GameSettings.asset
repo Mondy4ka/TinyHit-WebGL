@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 969cc5103e372bd40a3ee8eb77190957, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: Assembly-CSharp::GameSettings
+  TargetConfigs:
+  - {fileID: 11400000, guid: cf97f8836fe994647b04993052dfa0b7, type: 2}
+  - {fileID: 11400000, guid: ef23361cd6a6c224593d55f4f4eae801, type: 2}
+  - {fileID: 11400000, guid: ef23361cd6a6c224593d55f4f4eae801, type: 2}
+  KnifePrefab: {fileID: 4643949713687398360, guid: b76be4cc919d2b14eae3d337b72e0617, type: 3}
+  KnifePoolSize: 10
+  KnifeConfigs:
+  - {fileID: 11400000, guid: e1b56f166dd5cff44830ade60c8ff2d7, type: 2}
+  KnifeThrowTime: 0.1

@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63036a927bc9d3d4ba6b5b060101522a, type: 3}
+  m_Name: UISettings
+  m_EditorClassIdentifier: Assembly-CSharp::UISettings
+  FadeScreenOpenDuration: 1.25
+  FadeScreenCloseDuration: 0.75
+  FadeScreenOpenEasing: 8
+  FadeScreenCloseEasing: 9
+  FadeScreenOpenPosition1: {x: -1800, y: 375}
+  FadeScreenClosePosition1: {x: -649, y: 375}
+  FadeScreenOpenPosition2: {x: 1800, y: -375}
+  FadeScreenClosePosition2: {x: 650, y: -375}
+  GameOverBackgroundAlpha: 0.9
+  GameOverOpenPosition: {x: 0, y: 0}
+  GameOverClosePosition: {x: 0, y: -1700}
+  GameOverOpenDuration: 1
+  GameOverCloseDuration: 0.5
+  GameOverOpenEasing: 27
+  GameOverCloseEasing: 26
+  MenuScreenOpenDuration: 1
+  MenuScreenCloseDuration: 1
+  MenuScreenTipPulseDuration: 1
+  MenuScreenOpenEasing: 11
+  MenuScreenCloseEasing: 12
+  MenuScreenPulseEasing: 0
+  MenuScreenOpenPosition1: {x: -375, y: 650}
+  MenuScreenClosePosition1: {x: -1000, y: 1733}
+  MenuScreenOpenPosition2: {x: 375, y: -649}
+  MenuScreenClosePosition2: {x: 1000, y: -1732}
