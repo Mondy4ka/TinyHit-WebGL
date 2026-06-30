@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Knife : MonoBehaviour, IInitializable
+public class Knife : MonoBehaviour, IInitializable, IResetable
 {
-    public float Damage => _damage;
+    public float Damage { get; private set; }
     public KnifeTrigger KnifeTrigger => _knifeTrigger;
     public KnifeVisual KnifeVisual { get; private set; }
 
@@ -10,30 +10,24 @@ public class Knife : MonoBehaviour, IInitializable
     [SerializeField] private SpriteRenderer _spriteRenderer;
     [SerializeField] private float _squeezeScale;
 
-    private float _damage;
+    public void Initialize() => KnifeVisual = new(_spriteRenderer, _squeezeScale);
 
-    public void Initialize()
+    public void Reinitialize(KnifeConfig config)
     {
-        KnifeVisual = new(_spriteRenderer, _squeezeScale);
-    }
-
-    public void Reinitialize(KnifeConfig config, Vector2 spawnPosition)
-    {
-        ResetKnife();
-        MoveTo(spawnPosition);
-        _damage = config.Damage;
+        ResetItem();
+        Damage = config.Damage;
         KnifeVisual.SetSprite(config.Sprite);
         KnifeVisual.PulseAnimation();
     }
 
     public void MoveTo(Vector2 newPosition) => transform.position = newPosition;
 
-    public void ResetKnife()
+    public void ResetItem()
     {
         KnifeTrigger.SetStatic(false);
-        KnifeTrigger.transform.localPosition = Vector2.zero;
+        KnifeVisual.StopAnimation();
 
-        transform.rotation = Quaternion.Euler(Vector3.zero);
-        transform.localScale = Vector2.one;
+        transform.localRotation = Quaternion.Euler(Vector3.zero);
+        transform.localScale = Vector3.one;
     }
 }

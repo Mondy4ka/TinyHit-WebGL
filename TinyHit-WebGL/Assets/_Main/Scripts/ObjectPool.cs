@@ -1,18 +1,17 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
 public class ObjectPool<T> where T : MonoBehaviour
 {
-    private readonly T _objectPrefab;
-    private readonly Transform _parent;
+    public T ItemPrefab { get; private set; }
+    public Transform Parent { get; private set; }
+
     private readonly Queue<T> _pool = new();
 
-    public ObjectPool(T objectPrefab, Transform parent)
+    public ObjectPool(T itemPrefab, Transform parent)
     {
-        _objectPrefab = objectPrefab;
-        _parent = parent;
+        ItemPrefab = itemPrefab;
+        Parent = parent;
     }
 
     public void Initialize(int poolSize)
@@ -23,7 +22,7 @@ public class ObjectPool<T> where T : MonoBehaviour
 
     private void InstantiateNewItem()
     {
-        T newItem = UnityEngine.Object.Instantiate(_objectPrefab, _parent);
+        T newItem = Object.Instantiate(ItemPrefab, Parent);
         newItem.gameObject.SetActive(false);
 
         (newItem as IInitializable)?.Initialize();
@@ -47,7 +46,9 @@ public class ObjectPool<T> where T : MonoBehaviour
     public void ReturnItem(T item)
     {
         item.gameObject.SetActive(false);
-        item.transform.SetParent(_parent);
+        item.transform.SetParent(Parent);
+
+        (item as IResetable)?.ResetItem();
 
         _pool.Enqueue(item);
     }

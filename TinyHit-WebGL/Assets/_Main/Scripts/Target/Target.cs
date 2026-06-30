@@ -3,24 +3,29 @@ using UnityEngine;
 
 public class Target : MonoBehaviour
 {
-    public float KnifeDepth => _knifeDepth;
-    public Transform KnivesParent => _knivesParent;
+    public float KnivesRadius => _knivesRadius;
+    public Transform ItemsParent => _itemsParent;
     public TargetHealth TargetHealth { get; private set; }
     public TargetRotate TargetRotate { get; private set; }
     public TargetVisual TargetVisual { get; private set; }
 
     [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private Transform _knivesParent;
+    [SerializeField] private Transform _itemsParent;
     [SerializeField] private float _damageScale;
-    [SerializeField] private float _knifeDepth;
+    [SerializeField] private float _knivesRadius;
+    [SerializeField] private float _applesRadius;
 
     private ObjectPool<Knife> _staticKnivesPool;
+    private ObjectPool<Apple> _applesPool;
+
     private List<Knife> _activeKnives = new();
+    private List<Apple> _activeApples = new();
     private bool _isRotateActive;
 
-    public void Initialize(ObjectPool<Knife> staticKnivesPool)
+    public void Initialize(ObjectPool<Knife> staticKnivesPool, ObjectPool<Apple> applesPool)
     {
         _staticKnivesPool = staticKnivesPool;
+        _applesPool = applesPool;
 
         TargetHealth = new();
         TargetRotate = new(transform);
@@ -38,54 +43,53 @@ public class Target : MonoBehaviour
 
     public void SetStats(TargetConfig statsConfig)
     {
+        transform.eulerAngles = Vector3.zero;
+
         TargetHealth.SetHealthStats(statsConfig.MaxHealth);
         TargetRotate.SetRotationSequence(statsConfig.RotationSequence);
 
-        PlaceStaticKnives(statsConfig.KnivesAngel);
+        PlaceStaticItems(statsConfig.KnivesAngel, statsConfig.ApplesAngel);
     }
 
-    private void PlaceStaticKnives(List<int> knivesAngels)
+    private void PlaceStaticItems(List<int> knivesAngels, List<int> applesAngels)
     {
-        ReturnKnives();
+        PlacePreinstalledItems(_staticKnivesPool, _activeKnives, knivesAngels, _knivesRadius, 270);
+        PlacePreinstalledItems(_applesPool, _activeApples, applesAngels, _applesRadius, 90);
 
-        for (int i = 0; i < knivesAngels.Count; i++)
-        {
-            float rad = knivesAngels[i] * Mathf.Deg2Rad;
-            float posX = transform.position.x + (1 / _knifeDepth * Mathf.Cos(rad));
-            float posY = transform.position.y + (1 / _knifeDepth * Mathf.Sin(rad));
-
-            Knife knife = _staticKnivesPool.GetItem();
-
-            knife.KnifeTrigger.transform.SetParent(knife.transform);
-            knife.KnifeTrigger.transform.localPosition = Vector2.zero;
-            knife.KnifeTrigger.transform.localRotation = Quaternion.identity;
-
-            knife.transform.SetParent(KnivesParent);
-            knife.MoveTo(new(posX, posY));
+        foreach (var knife in _activeKnives)
             knife.KnifeTrigger.SetStatic(true);
-
-            Vector2 direction = (transform.position - knife.transform.position).normalized;
-            float angel = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            knife.transform.Rotate(0, 0, angel - 90);
-
-
-            _activeKnives.Add(knife);
-        }
     }
 
-    public void ReturnKnives()
+    private void PlacePreinstalledItems<T>(ObjectPool<T> objectPool, List<T> activeItems, List<int> itemAngles, float radius, float rotationOffset = 0.0f) where T : MonoBehaviour
     {
-        if (_activeKnives.Count <= 0) return;
+        ReturnItemsToPool(objectPool, activeItems);
 
-        foreach (Knife knife in _activeKnives)
+        foreach (var angle in itemAngles)
         {
-            _staticKnivesPool.ReturnItem(knife);
+            var item = objectPool.GetItem();
 
-            knife.ResetKnife();
-            knife.KnifeTrigger.SetStatic(false);
+            float radians = angle * Mathf.Deg2Rad;
+            float positionX = transform.position.x + (radius * Mathf.Cos(radians));
+            float positionY = transform.position.y + (radius * Mathf.Sin(radians));
+
+            item.transform.SetParent(_itemsParent);
+            item.transform.position = new(positionX, positionY);
+
+            Vector2 direction = (transform.position - item.transform.position).normalized;
+            float angel = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
+            item.transform.eulerAngles = new(0, 0, angel + rotationOffset);
+
+            activeItems.Add(item);
         }
+    }
+    public void ReturnItemsToPool<T>(ObjectPool<T> objectPool, List<T> activeItems) where T : MonoBehaviour
+    {
+        if (activeItems.Count <= 0) return;
 
-        _activeKnives.Clear();
+        foreach (var item in activeItems)
+            objectPool.ReturnItem(item);
+
+        activeItems.Clear();
     }
 
     public void SetRotateActive(bool isRotateActive) => _isRotateActive = isRotateActive;

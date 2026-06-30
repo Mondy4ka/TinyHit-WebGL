@@ -6,5 +6,7 @@ public class InputArea : MonoBehaviour, IPointerClickHandler
 {
     public event Action OnClick;
 
+    public void ResetAction() => OnClick = null;
+
     public void OnPointerClick(PointerEventData eventData) => OnClick?.Invoke();
 }

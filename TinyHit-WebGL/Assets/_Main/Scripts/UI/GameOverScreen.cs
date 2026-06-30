@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class GameOverScreen : MonoBehaviour
 {
-    [Header("Canvas")]
-    [SerializeField] private Canvas _canvas;
-
     [Header("Text Settings")]
     [SerializeField] private TMP_Text _currentScoreText;
     [SerializeField] private TMP_Text _currentStageText;
@@ -40,8 +37,6 @@ public class GameOverScreen : MonoBehaviour
             settings.GameOverCloseEasing,
             _blackScreenAnimation);
     }
-
-    public void SetCanvas(bool isCanvas) => _canvas.enabled = isCanvas;
 
     public void SetRunResults(int score, int stage)
     {

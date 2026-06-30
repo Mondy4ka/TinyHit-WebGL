@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -12,40 +12,24 @@ public class ShopScreen : MonoBehaviour
     [SerializeField] private TMP_Text _priceText;
     [SerializeField] private TMP_Text _damageText;
 
-    private InputArea _buyArea;
-    private KnifeService _knifeService;
-    private List<KnifeConfig> _knivesUnlocked;
-    private int _currentKnifeIndex;
+    [SerializeField] private InputArea _buyButton;
+    [SerializeField] private TMP_Text _buyButtonText;
 
-    public void Initialize(List<KnifeConfig> knivesUnlocked)
-    {
-        _knivesUnlocked = knivesUnlocked;
-    }
-
-    public void NextKnife()
-    {
-        _currentKnifeIndex = (_currentKnifeIndex + 1) % _knivesUnlocked.Count;
-        SetKnifeInfo(_knivesUnlocked[_currentKnifeIndex]);
-        InitializeBuyButton();
-    }
-
-    public void PreviousKnife()
-    {
-        _currentKnifeIndex = (_currentKnifeIndex - 1 + _knivesUnlocked.Count) % _knivesUnlocked.Count;
-        SetKnifeInfo(_knivesUnlocked[_currentKnifeIndex]);
-        InitializeBuyButton();
-    }
+    public void SetActiveCanvas(bool isActive) => _canvas.enabled = isActive;
 
     public void SetKnifeInfo(KnifeConfig config)
     {
         _knifeIcon.sprite = config.Sprite;
         _knifeNameText.SetText(config.Name);
-        _priceText.SetText(config.Price.ToString());
-        _damageText.SetText(config.Damage.ToString());
+        _priceText.SetText($"PRICE: {config.Price}");
+        _damageText.SetText($"DAMAGE: {config.Damage}");
     }
 
-    public void InitializeBuyButton()
+    public void InitializeBuyButton(Action onClick, string text)
     {
-        _buyArea.OnClick += () => _knifeService.SetKnifeType(_knivesUnlocked[_currentKnifeIndex]);
+        _buyButtonText.SetText(text);
+
+        _buyButton.ResetAction();
+        _buyButton.OnClick += onClick;
     }
 }

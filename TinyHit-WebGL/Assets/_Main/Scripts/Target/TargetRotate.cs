@@ -27,6 +27,8 @@ public class TargetRotate
 
     public void Update()
     {
+        if (_sequence.Count <= 0) return;
+
         _timer += Time.deltaTime;
         _currentState.Update(_targetTransform);
 

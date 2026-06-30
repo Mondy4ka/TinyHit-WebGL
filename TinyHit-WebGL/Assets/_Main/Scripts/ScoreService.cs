@@ -5,8 +5,6 @@ public class ScoreService
 {
     public event Action<int> OnScoreChanged;
     public event Action<int> OnStageChanged;
-    public event Action<int> OnBestScoreChanged;
-    public event Action<int> OnBestStageChanged;
 
     public int Score
     {
@@ -16,11 +14,8 @@ public class ScoreService
             _score = Mathf.Max(value, 0);
             OnScoreChanged?.Invoke(_score);
 
-            if (_score > _bestScore)
-            {
-                _bestScore = _score;
-                OnBestScoreChanged?.Invoke(_bestScore);
-            }
+            if (_score > _gameData.BestScore)
+                _gameData.BestScore = _score;
         }
     }
 
@@ -32,19 +27,17 @@ public class ScoreService
             _stage = Mathf.Max(value, 0);
             OnStageChanged?.Invoke(_stage);
 
-            if (_stage > _bestStage)
-            {
-                _bestStage = _stage;
-                OnBestStageChanged?.Invoke(_stage);
-            }
+            if (_stage > _gameData.BestStage)
+                _gameData.BestStage = _stage;
         }
     }
 
     private int _score = 0;
     private int _stage = 1;
 
-    private int _bestScore;
-    private int _bestStage;
+    private readonly GameData _gameData;
+
+    public ScoreService(GameData gameData) => _gameData = gameData;
 
     public void AddScore(int amount)
     {
@@ -60,10 +53,4 @@ public class ScoreService
         Score = 0;
         Stage = 1;
     }
-}
-
-public enum StageType
-{
-    Stage,
-    Boss
 }

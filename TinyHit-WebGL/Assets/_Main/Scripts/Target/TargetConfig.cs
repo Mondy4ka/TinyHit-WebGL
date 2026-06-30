@@ -4,16 +4,10 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "TargetStatsConfig", menuName = "TargetStatsConfig")]
 public class TargetConfig : ScriptableObject
 {
-    [Header("Visual Settings")]
     public Sprite Sprite;
-
-    [Header("Health Stats")]
     public int MaxHealth;
-
-    [Header("Static Knives Stats")]
     public List<int> KnivesAngel;
-
-    [Header("Rotation Stats")]
+    public List<int> ApplesAngel;
     [SerializeReference] public List<RotationState> RotationSequence;
 
     [ContextMenu("AddAccelerationState")]

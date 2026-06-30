@@ -6,37 +6,52 @@ public class InputService : MonoBehaviour
     public InputArea RestartArea => _restartArea;
     public InputArea MenuArea => _menuArea;
     public InputArea StartArea => _startArea;
+    public InputArea ShopArea => _shopArea;
+    public InputArea ShopToMenuArea => _shopToMenuArea;
+    public InputArea BuyArea => _buyArea;
+    public InputArea SwitchShopPrevArea => _switchShopPrevArea; 
+    public InputArea SwitchShopNextArea => _switchShopNextArea;
 
     [SerializeField] private InputArea _throwArea;
     [SerializeField] private InputArea _restartArea;
     [SerializeField] private InputArea _menuArea;
     [SerializeField] private InputArea _startArea;
+    [SerializeField] private InputArea _shopArea;
+    [SerializeField] private InputArea _shopToMenuArea;
+    [SerializeField] private InputArea _buyArea;
+    [SerializeField] private InputArea _switchShopPrevArea;
+    [SerializeField] private InputArea _switchShopNextArea;
 
     public void SetActiveThrowInputArea(bool isActive)
     {
-        if (ThrowArea == null) return;
+        if (_throwArea == null) return;
 
-        ThrowArea.gameObject.SetActive(isActive);
+        _throwArea.gameObject.SetActive(isActive);
     }
 
-    public void SetActiveReastartInputArea(bool isActive)
+    public void SetActiveGameOverInputAreas(bool isActive)
     {
-        if (RestartArea == null) return;
+        if (_restartArea == null || _menuArea == null) return;
 
-        RestartArea.gameObject.SetActive(isActive);
+        _restartArea.gameObject.SetActive(isActive);
+        _menuArea.gameObject.SetActive(isActive);
     }
 
-    public void SetActiveMenuInputArea(bool isActive)
+    public void SetActiveMenuInputAreas(bool isActive)
     {
-        if (MenuArea == null) return;
+        if (_startArea == null || _shopArea == null) return;
 
-        MenuArea.gameObject.SetActive(isActive);
+        _startArea.gameObject.SetActive(isActive);
+        _shopArea.gameObject.SetActive(isActive);
     }
 
-    public void SetActiveStartInputArea(bool isActive)
+    public void SetActiveShopInputAreas(bool isActive)
     {
-        if (StartArea == null) return;
+        if (_shopToMenuArea == null || _buyArea == null || _switchShopPrevArea == null || _switchShopNextArea == null) return;
 
-        StartArea.gameObject.SetActive(isActive);
+        _shopToMenuArea.gameObject.SetActive(isActive);
+        _buyArea.gameObject.SetActive(isActive);
+        _switchShopPrevArea.gameObject.SetActive(isActive);
+        _switchShopNextArea.gameObject.SetActive(isActive);
     }
 }

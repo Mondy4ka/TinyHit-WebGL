@@ -10,59 +10,52 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: aded4d092df38fb41b4a6b8874f57663, type: 3}
-  m_Name: TargetStatsConfig
+  m_Name: TargetStatsConfig 2
   m_EditorClassIdentifier: Assembly-CSharp::TargetStatsConfig
   Sprite: {fileID: 21300000, guid: 388271755da133945818e72ec38ccfd1, type: 3}
-  MaxHealth: 5
-  KnivesAngel: 200000005400000012010000
-  ApplesAngel: 860000004a010000
+  MaxHealth: 10
+  KnivesAngel: 3c00000078000000b4000000f00000002c01000068010000
+  ApplesAngel: 1e0000005a00000096000000d20000000e0100004a010000
   RotationSequence:
-  - rid: 8444194903619272774
-  - rid: 8444194903619272775
-  - rid: 8444194903619272777
-  - rid: 8444194903619272778
-  - rid: 8444194903619272779
-  - rid: 8444194903619272780
-  - rid: 8444194903619272781
+  - rid: 8444195013871272006
+  - rid: 8444195013871272007
+  - rid: 8444195013871272008
+  - rid: 8444195013871272009
+  - rid: 8444195013871272010
+  - rid: 8444194903619272782
   references:
     version: 2
     RefIds:
-    - rid: 8444194903619272774
-      type: {class: AccelerationState, ns: , asm: Assembly-CSharp}
-      data:
-        Duration: 1
-        StartRotateSpeed: 0
-        FinalRotateSpeed: 263
-    - rid: 8444194903619272775
+    - rid: 8444194903619272782
       type: {class: RotateState, ns: , asm: Assembly-CSharp}
       data:
         Duration: 1
-        CurrentSpeed: 263
-    - rid: 8444194903619272777
-      type: {class: AccelerationState, ns: , asm: Assembly-CSharp}
-      data:
-        Duration: 1
-        StartRotateSpeed: 263
-        FinalRotateSpeed: 0
-    - rid: 8444194903619272778
-      type: {class: RotateState, ns: , asm: Assembly-CSharp}
-      data:
-        Duration: 0.25
         CurrentSpeed: 0
-    - rid: 8444194903619272779
-      type: {class: AccelerationState, ns: , asm: Assembly-CSharp}
-      data:
-        Duration: 1
-        StartRotateSpeed: 0
-        FinalRotateSpeed: -263
-    - rid: 8444194903619272780
+    - rid: 8444195013871272006
       type: {class: RotateState, ns: , asm: Assembly-CSharp}
       data:
-        Duration: 1
-        CurrentSpeed: -263
-    - rid: 8444194903619272781
+        Duration: 0.5
+        CurrentSpeed: -600
+    - rid: 8444195013871272007
       type: {class: AccelerationState, ns: , asm: Assembly-CSharp}
       data:
-        Duration: 1
-        StartRotateSpeed: -263
+        Duration: 0.5
+        StartRotateSpeed: -600
+        FinalRotateSpeed: 0
+    - rid: 8444195013871272008
+      type: {class: RotateState, ns: , asm: Assembly-CSharp}
+      data:
+        Duration: 0.75
+        CurrentSpeed: 0
+    - rid: 8444195013871272009
+      type: {class: AccelerationState, ns: , asm: Assembly-CSharp}
+      data:
+        Duration: 0.5
+        StartRotateSpeed: 0
+        FinalRotateSpeed: 900
+    - rid: 8444195013871272010
+      type: {class: AccelerationState, ns: , asm: Assembly-CSharp}
+      data:
+        Duration: 5
+        StartRotateSpeed: 900
         FinalRotateSpeed: 0

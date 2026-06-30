@@ -4,6 +4,7 @@ using UnityEngine;
 public class KnifeTrigger : MonoBehaviour
 {
     public event Action OnHitFail;
+    public event Action<Apple> OnAppleHit;
 
     [SerializeField] private Collider2D _staticTrigger;
     [SerializeField] private Collider2D _throwTrigger;
@@ -16,9 +17,6 @@ public class KnifeTrigger : MonoBehaviour
 
         SetStaticTriggerActive(isStatic);
         SetThrowTriggerActive(!isStatic);
-
-        transform.localPosition = Vector2.zero;
-        transform.localRotation = Quaternion.identity;
     }
 
     public void SetStaticTriggerActive(bool isActive) => _staticTrigger.enabled = isActive;
@@ -30,6 +28,15 @@ public class KnifeTrigger : MonoBehaviour
         if (_isStatic) return;
 
         if (collision.CompareTag("Knife"))
+        {
             OnHitFail?.Invoke();
+            return;
+        }
+
+        if (collision.CompareTag("Apple"))
+        {
+            OnAppleHit?.Invoke(collision.GetComponent<Apple>());
+            return;
+        }
     }
 }

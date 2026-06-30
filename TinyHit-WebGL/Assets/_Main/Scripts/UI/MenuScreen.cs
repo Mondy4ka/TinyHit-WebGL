@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class MenuScreen : MonoBehaviour
 {
-    [Header("Canvas")]
-    [SerializeField] private Canvas _canvas; 
-
     [Header("Text Settings")]
     [SerializeField] private TMP_Text _bestScoreText;
     [SerializeField] private TMP_Text _bestStageText;
@@ -23,13 +20,11 @@ public class MenuScreen : MonoBehaviour
     private CurtainAnimation _animation;
     private BlackScreenAnimation _blackScreenAnimation;
     private PulseAnimation _pulseAnimation;
-    private ScoreService _scoreService;
+    private GameData _gameData;
 
-    private float _startTipAlpha;
-
-    public void Initialize(UISettings settings, ScoreService scoreService)
+    public void Initialize(UISettings settings, GameData gameData)
     {
-        _scoreService = scoreService;
+        _gameData = gameData;
 
         _pulseAnimation = new(
             _startTipText,
@@ -56,11 +51,15 @@ public class MenuScreen : MonoBehaviour
             settings.MenuScreenCloseEasing, 
             _blackScreenAnimation);
 
-        _scoreService.OnBestScoreChanged += SetBestScore;
-        _scoreService.OnBestStageChanged += SetBestStage;
+        _gameData.OnBestScoreChanged += SetBestScore;
+        _gameData.OnBestStageChanged += SetBestStage;
     }
 
-    public void SetCanvas(bool isCanvas) => _canvas.enabled = isCanvas;
+    public void Deinitialize()
+    {
+        _gameData.OnBestScoreChanged -= SetBestScore;
+        _gameData.OnBestStageChanged -= SetBestStage;
+    }
 
     public void SetBestScore(int bestScore)
     {
@@ -80,7 +79,9 @@ public class MenuScreen : MonoBehaviour
 
     public void Close(Action onComplete = null) => _animation.Close(onComplete);
 
-    public void TipPulse() => _pulseAnimation.AlphaPulse(_startTipAlpha);
+    public void TipPulse() => _pulseAnimation.AlphaPulse(0);
 
     public void StopTipPulse() => _pulseAnimation.StopAnimation();
+
+    private void OnDestroy() => Deinitialize();
 }

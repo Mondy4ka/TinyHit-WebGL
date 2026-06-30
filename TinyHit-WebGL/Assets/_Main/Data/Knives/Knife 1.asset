@@ -10,7 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd5098fe1f8f3634ebe8ba4e501276bd, type: 3}
-  m_Name: Knife Config
+  m_Name: Knife 1
   m_EditorClassIdentifier: Assembly-CSharp::KnifeConfig
-  Sprite: {fileID: 21300000, guid: ccec482d730686d4f8361b93cf0bfc7c, type: 3}
-  Damage: 1
+  Sprite: {fileID: 21300000, guid: c893713f94a8f80429624a97179d12b9, type: 3}
+  Id: 1
+  Name: Big Knife
+  Price: 5
+  Damage: 2

@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class GameScreen : MonoBehaviour
 {
-    [Header("Canvas")]
     [SerializeField] private Canvas _canvas;
 
     [SerializeField] private TMP_Text _stageNameText;
@@ -27,13 +26,13 @@ public class GameScreen : MonoBehaviour
         _scoreService.OnScoreChanged += UpdateScoreUI;
     }
 
-    public void SetCanvas(bool isCanvas) => _canvas.enabled = isCanvas;
-
     public void Deinitialize()
     {
         _target.TargetHealth.OnHealthChanged -= UpdateTargetHealthUI;
-        _scoreService.OnScoreChanged += UpdateScoreUI;
+        _scoreService.OnScoreChanged -= UpdateScoreUI;
     }
+
+    public void SetActiveCanvas(bool isActive) => _canvas.enabled = isActive;
 
     public void UpdateScoreUI(int score)
     {
@@ -47,6 +46,13 @@ public class GameScreen : MonoBehaviour
         if (_stageNameText == null) return;
 
         _stageNameText.SetText($"Stage {stage}");
+    }
+
+    public void UpdateStageNameUI(string stageName)
+    {
+        if (_stageNameText == null) return;
+
+        _stageNameText.SetText(stageName);
     }
 
     public void UpdateTargetHealthUI(float currentHealth, float maxHealth)

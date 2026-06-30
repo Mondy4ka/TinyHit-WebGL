@@ -1,16 +1,19 @@
 fileFormatVersion: 2
-guid: 388271755da133945818e72ec38ccfd1
+guid: bc7e428d6fad2dc4c9f56d42c7236f84
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4119334708683220384
-    second: Target_0
+      213: -2276467107433342624
+    second: Apple 1_0
+  - first:
+      213: 7018111568887295605
+    second: Apple 1_1
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
     enableMipMap: 0
-    sRGBTexture: 1
+    sRGBTexture: 0
     linearTexture: 0
     fadeOut: 0
     borderMipMap: 0
@@ -51,7 +54,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 85.333336
+  spritePixelsToUnits: 256
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +78,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 2
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -126,13 +129,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Target_0
+      name: Apple 1_0
       rect:
         serializedVersion: 2
-        x: 13
-        y: 11
-        width: 232
-        height: 232
+        x: 129
+        y: 179
+        width: 71
+        height: 70
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -141,8 +144,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 06adff958ee25d6c0800000000000000
-      internalID: -4119334708683220384
+      spriteID: 069139e1a3d5860e0800000000000000
+      internalID: -2276467107433342624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Apple 1_1
+      rect:
+        serializedVersion: 2
+        x: 30
+        y: 3
+        width: 196
+        height: 168
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57e2691d947556160800000000000000
+      internalID: 7018111568887295605
       vertices: []
       indices: 
       edges: []
@@ -161,7 +186,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Target_0: -4119334708683220384
+      Apple 1_0: -2276467107433342624
+      Apple 1_1: 7018111568887295605
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

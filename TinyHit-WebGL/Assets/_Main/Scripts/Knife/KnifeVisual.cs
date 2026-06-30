@@ -1,8 +1,6 @@
 using PrimeTween;
-using System;
 using UnityEngine;
 
-[Serializable]
 public class KnifeVisual
 {
     private readonly SpriteRenderer _spriteRenderer;
@@ -40,9 +38,18 @@ public class KnifeVisual
             .OnComplete(() => Tween.Scale(_spriteRenderer.transform, _standartScale, 0.1f));
     }
 
+    public void DeathAnimation()
+    {
+        StopAnimation();
+
+        _currentTween = Tween.PositionY(_spriteRenderer.transform, _spriteRenderer.transform.position.y - 10f, 0.1f, Ease.InQuint)
+            .OnComplete(() => Tween.Scale(_spriteRenderer.transform, Vector2.zero, 0.1f, Ease.InBack));
+    }
+
     public void StopAnimation()
     {
         _spriteRenderer.transform.localScale = _standartScale;
+        _spriteRenderer.transform.localPosition = Vector2.zero;
 
         if (_currentTween.isAlive == false) return;
 

@@ -5,9 +5,6 @@ using UnityEngine.UI;
 
 public class FadeScreen : MonoBehaviour
 {
-    [Header("Canvas")]
-    [SerializeField] private Canvas _canvas;
-
     [Header("BlackScreen Settings")]
     [SerializeField] private Image _blackScreen;
 
@@ -43,8 +40,6 @@ public class FadeScreen : MonoBehaviour
             settings.FadeScreenCloseEasing,
             _blackScreenAnimation);
     }
-
-    public void SetCanvas(bool isCanvas) => _canvas.enabled = isCanvas;
 
     public void SetText(string text)
     {
